@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 4</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"> </script>
+</head>
+<body>
+    <div id="app" >
+        <input type="text" placeholder="Name" v-model ="name" v-on:input="checkName">
+        <div class="nameError" >this name is null</div>
+        <input type="text" name="" id="" placeholder="Email" v-model = "email" v-on:input = "checkEmail" > 
+        <div class="emailError" >this email is not actual </div>
+        <input type="password" name="" id="" placeholder="Password" v-model ="password" v-on:input="checkPassword">
+        <div class="passwordError" ></div>
+       <button v-on:click = "conf">confirm</button>
+    </div>
+    <script>
+        new Vue({
+            el: "#app", 
+            data: {
+                name: "",
+                email: "", 
+                password: ""
+            },
+            methods: {
+                conf(){
+                    if(this.checkName() && this.checkEmail() && this.checkPassword()){
+                        alert("Congratulations, you've successfully registered!");
+                    }else{
+                        alert("Your account not registered(");
+                    }
+                },
+                checkName(){
+                    let nameError = document.querySelector(".nameError");
+                    if(this.name == ""){
+                        nameError.innerHTML = "pls, write your name";
+                        return false;
+                    }else{
+                        nameError.innerHTML = "";
+                        return true;
+                    }
+                },
+                checkEmail(){
+                    let emailError = document.querySelector(".emailError");
+                    if(this.email.includes("@")){
+                        emailError.innerHTML = "";
+                        return true;
+                    }else{
+                        emailError.innerHTML = "this email not actual";
+                        return false;
+                    }
+                },
+                checkPassword(){
+                    let passwordError = document.querySelector(".passwordError");
+                    if(this.password.length < 4 && this.password.length > 0){
+                        passwordError.innerHTML = "Password length must be have more than 4 letters";
+                        return false;
+                    }else if(this.password.length >= 9){
+                        passwordError.innerHTML = "Password length must be have less than 8 letters";
+                        return false;
+                    }else if(this.password.length == 0){
+                        passwordError.innerHTML = "Password cannot be empty";
+                    }else{
+                        passwordError.innerHTML = "";
+                        return true;
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>

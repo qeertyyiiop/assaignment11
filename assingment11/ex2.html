@@ -1,0 +1,53 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 2</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"> </script>
+</head>
+<body>
+    <div id="app">
+        <h1>Fruits:</h1>
+        <input type="text"  class = "inputAdd" v-on:input = "input($event.target.value)">
+        <button v-on:click="add">add</button>
+           <ul class = "ul">
+               <li v-for="title in title"><div class="">{{title}}</div>
+                   <button v-on:click="remove">remove</button>
+               </li>
+           </ul>
+       </div>   
+      <script>
+      let inr = document.querySelector(".inputAdd");
+      let ul = document.querySelector(".ul");
+      new Vue ({
+    el: '#app',
+    data: {
+        text: "fruits",
+        title: ["apple","banana","blueberry","orange"]
+    }  
+    ,methods:{ 
+        remove(e){
+            let r = e.target.parentNode.children[0].innerText;
+            this.title = this.title.filter(arr=>{
+                if(arr == r){
+                    return false;
+                }else{
+                    return true;
+                }
+            })
+          
+        }
+        ,
+         input(value){
+         text = value;
+        }
+        ,add(){
+            this.title.push(text);
+    
+        }
+    }
+});
+      </script>
+      
+</body>
+</html>

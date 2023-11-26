@@ -1,0 +1,43 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 5</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+</head>
+<body>
+    
+    <div id="app">
+        <ul>
+            <li v-for="task in tasks" :class="{ completed: task.completed }">
+                {{ task.title }}
+                <input type="checkbox" v-model="task.completed"> completed
+            </li>
+        </ul>
+        <input v-model="newTask" placeholder="Enter task" >
+        <button @click="add">add task</button>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                tasks: [
+                    {  title: 'wake up', completed: true },
+                    {  title: 'brush teeth', completed: false },
+                    {  title: 'eat breakfast', completed: false }
+                ],
+                newTask: ""
+            },
+            methods: {
+                add: function () {
+                    if(this.newTask.trim !== ""){
+                        this.tasks.push({ title: this.newTask, completed: false});
+                        this.newTask = "";
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
